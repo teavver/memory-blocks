@@ -49,6 +49,7 @@ body, html {
   width: 40px;
   height: 40px;
   background-color: rgb(120,93,244);
+  border-radius: 8px;
 }
 
 .navbar-link {
