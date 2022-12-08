@@ -13,11 +13,12 @@ const Game = () => {
     const [gameStarted, setGameStarted] = useState(false);
     const [score, setScore] = useState(1);
     const [correctTiles, setCorrectTiles] = useState([]);
+
     // Game loop
 
     const test = (id) => {
         console.log("clicked " + id);
-    }    
+    }
     
     const start_game = () => {
         setGameStarted(true);
@@ -27,10 +28,13 @@ const Game = () => {
     const game_loop = async () => {
     setScore(score + 1);
     for (var i = 0; i < score; i++) {
-        // animate tile
 
+        // roll a tile
         const randomly_rolled_tile = Math.floor(Math.random() * 9) + 1;
+        // push rolled tile into arr
+        correctTiles.push(randomly_rolled_tile);
         const animateTile = Promise.resolve(randomly_rolled_tile);
+        // animate the tile
         animateTile.then((id) => {
             console.log(id);
         })
@@ -38,8 +42,7 @@ const Game = () => {
         await timer(SETTINGS_TILE_TIMEOUT);
         }
         console.log("Game loop finished");
-
-        // await_user_input_loop();
+        // await_user_input_loop();        
     }
 
 
