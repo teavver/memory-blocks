@@ -1,3 +1,3 @@
 export const settings = {
-    timeout: 1500,
+    timeout: 1250,
 }
