@@ -5,9 +5,7 @@ function App() {
   return (
     <div className="main-content-ctn">
       <div className='navbar-ctn'>
-        <div className='navbar-logo'>
-        {/* logo goes here */}
-        </div>
+        <div className='navbar-logo'></div>
         <div className='navbar-link'>
           Memory Blocks
         </div>
@@ -18,7 +16,7 @@ function App() {
           <a href="">Leaderboard</a>
         </div>
         <div className='navbar-link'>
-          <a href="">Github</a>
+          <a href="https://github.com/teavver/memory-blocks">Github</a>
         </div>
       </div>
       <div className='main-content'>
