@@ -28,6 +28,9 @@ function App() {
           <Game />
         </div>
       </div>
+      <div className='footer'>
+        teaver @ 2022
+      </div>
     </div>
     );
 }

@@ -3,7 +3,6 @@ import GameTile from "./Tile"
 const GameTiles = (props) => {
     return(
         <>
-        {/* So ugly and dry */}
         <GameTile id={1} onClick={props.onClick}/>
         <GameTile id={2} onClick={props.onClick}/>
         <GameTile id={3} onClick={props.onClick}/>

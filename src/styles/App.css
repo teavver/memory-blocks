@@ -27,7 +27,7 @@ body, html {
   height: 90vh;
   margin-top: 5vh;
   margin-bottom: 5vh;
-  border: 5px solid rgba(0,0,0,0.22);
+  border: 5px solid rgba(0,0,0,0.11);
   border-radius: 12px;
 }
 
@@ -41,7 +41,7 @@ body, html {
   margin-right: 20%;
   margin-top: 2vh;
   height: 8vh;
-  border: 5px solid rgba(0,0,0,0.22);
+  border: 5px solid rgba(0,0,0,0.11);
   border-radius: 12px;
 }
 
@@ -49,12 +49,13 @@ body, html {
   margin-left: 14px;
   width: 40px;
   height: 40px;
-  background-color: rgb(120,93,244);
+  background-color: rgb(38, 88, 206);
   border-radius: 8px;
 }
 
 .navbar-link {
   margin: 6px;
+  font-weight: bold;
 }
 
 .game-ctn {
@@ -62,4 +63,11 @@ body, html {
   display: inline-block;
   border: 5px solid black;
   border-radius: 8px;
+}
+
+.footer {
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 2.5%;
 }

@@ -11,7 +11,7 @@
     width: 97.5%;
     height: 97.5%;
     margin: 1.25%;
-    background-color: rgb(120,93,244);
+    background-color: rgb(57, 68, 221);
     border-radius: 8px;
     cursor: pointer;
 
@@ -36,15 +36,11 @@
 }
 
 .game-tile:hover {
-    background-color: rgb(100,88,200);
+    background-color:rgb(52, 61, 211);
 }
 
 .game-tile:active {
-    background-color: rgb(92,79,184);
-}
-
-.game-tile-click {
-    background-color: rgb(100,233, 255);
+    background-color: rgb(42,51,201);
 }
 
 .game-tile-click-correct {
@@ -61,10 +57,10 @@
 }
 
 @keyframes tile-animation {
-    0% { background-color: rgb(120,93,244) }
-    33% { background-color: rgb(100,233, 255) }
-    66% { background-color: rgb(100,233, 255) }
-    100% { background-color: rgb(120,93,244) }
+    0% { background-color:  rgb(57, 68, 221) }
+    33% { background-color: rgb(87, 216, 177) }
+    66% { background-color: rgb(87, 216, 177) }
+    100% { background-color:  rgb(57, 68, 221) }   
 }
 
 .hidden {

@@ -1,5 +1,5 @@
 import GameTiles from "./GameTiles";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { settings } from "./Settings";
 import Score from "./Score";
 
@@ -12,27 +12,39 @@ const Game = () => {
     // mode (easy -> 3 mistakes, medium - 1 mistake, hard - 0 mistakes, default - hard)
     // tile_ids on tiles
     // tile_timeout in ms
-
+    
     // User settings
     const SETTINGS_TILE_TIMEOUT = settings.timeout;
     // const TILE_COLOR = settings.tile_color;
-
+    
     // Returns a Promise that resolves after "ms" Milliseconds
     const timer = ms => new Promise(res => setTimeout(res, ms));
     
     // States
     const [gameStarted, setGameStarted] = useState(false);
     const [correctTiles, setCorrectTiles] = useState([]);
-    const [currentTileAnim, setCurrentTileAnim] = useState(null);
+    const [userInputTiles, setUserInputTiles] = useState(0);
+    const [userInputDisabled, setUserInputDisabled] = useState(true);
     const [score, setScore] = useState(0);
+    const isFirstRender = useRef(true);
 
+    let user_input_tiles = []
+
+     useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    console.log('userInputTiles: ', userInputTiles);
+    }, [userInputTiles]);
+    
     const start_game = () => {
-        // setGameStarted(true);
+        setGameStarted(true);
         game_loop();
     }
-    
+     
     const roll_tile = () => {
-        // Roll a random tile ( range 1-9 )
         const rolled_tile = Math.floor(Math.random() * 9) + 1;
         correctTiles.push(rolled_tile);
     }
@@ -48,32 +60,46 @@ const Game = () => {
     }
     
     const game_loop = async () => {
-
-        setScore(score +1);
-        roll_tile();
+        console.log("Game loop started")
+        setScore(score +1)
+        setUserInputDisabled(true)
         
-        // Animate each tile before awaiting user input
+        roll_tile()
+        // Animate correctTiles[]
         for (let i = 0; i < correctTiles.length; i++) {
-            // Timeout to finish anim
-            animate_tile(correctTiles[i]);
-            await timer(SETTINGS_TILE_TIMEOUT);
+            animate_tile(correctTiles[i])
+            await timer(SETTINGS_TILE_TIMEOUT)
         }
-        console.log("Game loop finished");
-        // await_user_input_loop();        
+        console.log("Game loop finished, awaiting input")
+        setUserInputDisabled(false)
     }
+    
+    const tile_input = (tile_id) => {
 
-    const tile_click = (id) => {
-        // Check each tile in state arr with user input
-        console.log("clicked " + id);
+        // needs fix (!!!)
+
+        user_input_tiles.push(tile_id)
+        // evaluate input
+        for (let i = 0; i < score; i++) {
+            if(user_input_tiles[i] === correctTiles[i] ){
+                console.log("good input")
+            }
+            else {
+                console.log("bad input")
+                // alert("game over")
+                return
+            }
+        }
+        game_loop()
     }
 
     return (
         <>
         <div className="game-tile-ctn">
             <GameTiles
-            onClick={tile_click}
+            onClick={ userInputDisabled ? {} : tile_input}
             />
-            <button className={gameStarted ? "game-start-btn hidden" : "game-start-btn"}onClick={() => game_loop()}>Play</button>
+            <button className={gameStarted ? "game-start-btn hidden" : "game-start-btn"}onClick={() => start_game()}>Play</button>
         </div>
         </>
     );
