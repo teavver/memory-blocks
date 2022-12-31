@@ -59,10 +59,15 @@ body, html {
 }
 
 .game-ctn {
+  display: flex;
+  flex-direction: column;  
+}
+
+.game-tiles-ctn { 
   background: black;
   display: inline-block;
   border: 5px solid black;
-  border-radius: 8px;
+  border-radius: 9px;
 }
 
 .footer {

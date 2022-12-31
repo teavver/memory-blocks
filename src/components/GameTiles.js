@@ -12,6 +12,13 @@ const GameTiles = (props) => {
         <GameTile id={7} onClick={props.onClick}/>
         <GameTile id={8} onClick={props.onClick}/>
         <GameTile id={9} onClick={props.onClick}/>
+        <GameTile id={10} onClick={props.onClick}/>
+        <GameTile id={11} onClick={props.onClick}/>
+        <GameTile id={12} onClick={props.onClick}/>
+        <GameTile id={13} onClick={props.onClick}/>
+        <GameTile id={14} onClick={props.onClick}/>
+        <GameTile id={15} onClick={props.onClick}/>
+        <GameTile id={16} onClick={props.onClick}/>
         </>
     )
 }
