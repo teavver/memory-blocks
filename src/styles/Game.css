@@ -1,46 +1,49 @@
+html {
+    --dark_mode_bg: 34, 40, 49;
+    --dark_mode_border: 44, 50, 59;
+    --dark_mode_text: 230, 230, 230;
+    --tile_color: 57, 68, 221;
+    --tile_color_hint: 87, 216, 177;
+}
 .game-tile-ctn {
     display: grid;
-    grid-template-columns: repeat(3, 80px);
-    grid-template-rows: repeat(3, 80px);
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(4, 80px);
     grid-gap: 5px;
     width: 100%;
     height: 100%;
+    background: rgba(0,0,0,0.11);
 }
 
 .game-tile {
+    background: rgba(var(--tile_color),0.75);
     width: 97.5%;
     height: 97.5%;
     margin: 1.25%;
-    background-color: rgb(57, 68, 221);
     border-radius: 8px;
     cursor: pointer;
-
-    /* numbers ON - testing */
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-weight: bold; */
 }
 
 .game-start-btn {
-    width: 100%;
-    height: 24px;
+    width: 50%;
+    align-self: center;
+    height: 32px;
     margin: 0;
     padding: 0;
     margin-top: 14px;
     margin-bottom: 14px;
-    margin-left: 106%;
     border-radius: 8px;
-    border: none;
+    border: 5px solid rgba(0,0,0,0.11);
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .game-tile:hover {
-    background-color:rgb(52, 61, 211);
+    background-color: rgba(var(--tile_color), 0.95);
 }
 
 .game-tile:active {
-    background-color: rgb(42,51,201);
+    background-color: rgba(var(--tile_color), 0.65);
 }
 
 .game-tile-click-correct {
@@ -57,12 +60,18 @@
 }
 
 @keyframes tile-animation {
-    0% { background-color:  rgb(57, 68, 221) }
-    33% { background-color: rgb(87, 216, 177) }
-    66% { background-color: rgb(87, 216, 177) }
-    100% { background-color:  rgb(57, 68, 221) }   
+    0% { background-color:  rgb(var(--tile_color)) }
+    33% { background-color: rgb(var(--tile_color_hint)) }
+    66% { background-color: rgb(var(--tile_color_hint)) }
+    100% { background-color:  rgb(var(--tile_color)) }
 }
 
 .hidden {
     display: none;
+}
+
+.dark-mode {
+    background-color: rgb(var(--dark_mode_bg));
+    border-color: rgb(var(--dark_mode_border));
+    color: rgb(var(--dark_mode_text));
 }
