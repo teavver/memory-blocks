@@ -1,3 +1,53 @@
 .settings-ctn {
-    background-color: aliceblue;
+    width: 40%;
+    height: 50%;
+    border-radius: 8px;
+    border: 5px solid rgba(0,0,0,0.11);
+    overflow-y:scroll;
+}
+
+.settings-content {
+    height: 200%;
+}
+
+.settings-tile-colorpicker-ctn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-tile-colorpicker {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+.settings-tile-colorpicker-selected {
+    padding: 4px;
+    border: 4px solid black;
+}
+
+#settings-tile-color-1 {
+    background-color: rgb(var(--tile_color_default));
+}
+#settings-tile-color-2 {
+    background-color: rgb(var(--tile_color_2));
+}
+#settings-tile-color-3 {
+    background-color: rgb(var(--tile_color_3));
+}
+#settings-tile-color-4 {
+    background-color: rgb(var(--tile_color_4));
+}
+
+ul, li {
+    padding: 4px;
+    list-style: none;
+}
+
+p {
+    font-weight: bold;
 }

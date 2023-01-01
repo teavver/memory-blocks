@@ -1,4 +1,4 @@
-body, html {
+body {
   margin: 0;
   padding: 0;
   display: flex;
@@ -6,7 +6,6 @@ body, html {
   height: 100vh;
   font-family: monospace;
   font-size: 16px;
-  /* background-color: rgb(44,47,49); */
 }
 
 .main-content-ctn {
@@ -14,7 +13,6 @@ body, html {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  /* background-color: green; */
 }
 
 #main-content {
@@ -49,7 +47,7 @@ body, html {
   margin-left: 14px;
   width: 40px;
   height: 40px;
-  background-color: rgb(38, 88, 206);
+  background-color: rgba(var(--tile_color),0.95);
   border-radius: 8px;
 }
 
@@ -60,7 +58,7 @@ body, html {
 
 .game-ctn {
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
 }
 
 .game-tiles-ctn { 

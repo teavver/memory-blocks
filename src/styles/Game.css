@@ -1,10 +1,3 @@
-html {
-    --dark_mode_bg: 34, 40, 49;
-    --dark_mode_border: 44, 50, 59;
-    --dark_mode_text: 230, 230, 230;
-    --tile_color: 57, 68, 221;
-    --tile_color_hint: 87, 216, 177;
-}
 .game-tile-ctn {
     display: grid;
     grid-template-columns: repeat(4, 80px);
@@ -71,6 +64,7 @@ html {
 }
 
 .dark-mode {
+    color-scheme: dark;
     background-color: rgb(var(--dark_mode_bg));
     border-color: rgb(var(--dark_mode_border));
     color: rgb(var(--dark_mode_text));

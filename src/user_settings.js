@@ -1,3 +1,3 @@
-export const user_settings = { 
+export const user_settings = {
     timeout: 1250,
 }

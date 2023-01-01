@@ -1,11 +1,12 @@
-import '../styles/App.css';
+import '../styles/app.css';
+import "../styles/variables.css";
 import Game from './Game';
 import Settings from './Settings';
 import { useEffect, useState, useRef } from 'react';
 import load_settings from '../utils/load_settings';
 
 function App() {
-  const [settingsVisible, setSettingsVisible] = useState(false)
+  const [settingsVisible, setSettingsVisible] = useState(true)
 
   const isFirstRender = useRef(true)
 
@@ -24,7 +25,7 @@ function App() {
   
   const CloseSettingsBtn = () => {
     return (
-      <div className='close-settings-btn'>
+      <div className='close-settings-btn-ctn'>
         <button className='navbar-link' onClick={ () => toggle_show_settings() }>X</button>
       </div>
     )
