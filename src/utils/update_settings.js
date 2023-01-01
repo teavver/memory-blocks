@@ -6,4 +6,4 @@ const update_settings = (css_var, value) => {
     console.log(user_settings.css_var)
 }
 
-export default update_settings;
+export default update_settings

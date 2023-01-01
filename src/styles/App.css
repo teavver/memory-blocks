@@ -64,9 +64,9 @@ body, html {
 }
 
 .game-tiles-ctn { 
-  background: black;
+  background: rgb(34,34,34);
   display: inline-block;
-  border: 5px solid black;
+  border: 5px solid rgb(34,34,34);
   border-radius: 9px;
 }
 

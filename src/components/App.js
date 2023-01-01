@@ -1,23 +1,35 @@
 import '../styles/App.css';
 import Game from './Game';
 import Settings from './Settings';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import load_settings from '../utils/load_settings';
 
 function App() {
-  const [settingsVisible, setSettingsVisible] = useState(true)
-  
+  const [settingsVisible, setSettingsVisible] = useState(false)
+
+  const isFirstRender = useRef(true)
+
+  // Check user settings on page load
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      load_settings()
+      return;
+    } 
+  }, [])
+
   const toggle_show_settings = () => {
-    console.log("toggling");
-    setSettingsVisible(!settingsVisible);
+    setSettingsVisible(!settingsVisible)
   }
   
   const CloseSettingsBtn = () => {
-       return (
-          <div className='close-settings-btn'>
-            <button className='navbar-link' onClick={ () => toggle_show_settings() }>X</button>
-          </div>
-       )
+    return (
+      <div className='close-settings-btn'>
+        <button className='navbar-link' onClick={ () => toggle_show_settings() }>X</button>
+      </div>
+    )
   }
+
   return (
     <div className="main-content-ctn">
       <div className='navbar-ctn'>
@@ -28,18 +40,18 @@ function App() {
         </div>
         {/* Play (home) */}
         <div className='navbar-link'>
-          <a href="">Play</a>
+          <a href="#" onClick={ () => setSettingsVisible(false) }>Play</a>
         </div>
         {/* Leaderboard (daily + global) */}
         <div className='navbar-link'>
-          <a href="">Leaderboard</a>
+          <a href="#">Leaderboard</a>
         </div>
         {/* Github repo */}
         <div className='navbar-link'>
           <a href="https://github.com/teavver/memory-blocks">Github</a>
         </div>
          <div className='navbar-link'>
-          <a href="" onClick={ () => toggle_show_settings() }>Settings</a>
+          <a href="#" onClick={ () => toggle_show_settings() }>Settings</a>
         </div>
 
       </div>
@@ -57,7 +69,7 @@ function App() {
           }
       </div>
       <div className='footer'>
-        teaver @ 2022
+        teaver @ 2023
       </div>
     </div>
     );
