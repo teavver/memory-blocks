@@ -1,9 +1,8 @@
-import check_setting from "./check_setting";
-import update_settings from "./update_settings";
+import bool_setting from "./bool_setting"
 
 const load_settings = () => {
     // Check for dark mode first and apply
-    if(localStorage.getItem("DARK_MODE") === "true"){
+    if(bool_setting("DARK_MODE") === true){
         var element = document.body
         element.classList.add("dark-mode")
         if(document.getElementById("dark_mode_checkbox")){
@@ -12,7 +11,7 @@ const load_settings = () => {
     }
     // Eval all other settings
     for (var i = 0; i < localStorage.length; i++){
-        console.log(localStorage.getItem("DARK_MODE"))
+        // console.log(localStorage.getItem())
     }
 }
 

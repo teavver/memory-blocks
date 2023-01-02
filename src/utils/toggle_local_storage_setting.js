@@ -1,4 +1,4 @@
-const toggle_setting = (setting_type) => {
+const toggle_local_storage_setting = (setting_type) => {
     if(localStorage.getItem(setting_type) === "true"){
         localStorage.setItem(setting_type, "false")
         return
@@ -9,4 +9,4 @@ const toggle_setting = (setting_type) => {
     }
 }
 
-export default toggle_setting
+export default toggle_local_storage_setting

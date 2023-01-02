@@ -1,12 +1,16 @@
 import '../styles/app.css';
 import "../styles/variables.css";
 import Game from './Game';
+import Score from './Score';
 import Settings from './Settings';
-import { useEffect, useState, useRef } from 'react';
+import { tile_colors } from '../utils/tile_colors';
+import updt_css_var from '../utils/updt_css_var';
+import check_setting from '../utils/check_setting';
 import load_settings from '../utils/load_settings';
+import { useEffect, useState, useRef } from 'react';
 
 function App() {
-  const [settingsVisible, setSettingsVisible] = useState(true)
+  const [settingsVisible, setSettingsVisible] = useState(false)
 
   const isFirstRender = useRef(true)
 
@@ -15,6 +19,11 @@ function App() {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       load_settings()
+      if(check_setting("TILE_COLOR_ID") === true){
+        const color_id = localStorage.getItem("TILE_COLOR_ID")
+        const settings_user_color = tile_colors[color_id]
+        updt_css_var("--tile_color",settings_user_color)
+      }
       return;
     } 
   }, [])
@@ -64,9 +73,12 @@ function App() {
             <Settings />
             </div>
             :
+            <>
             <div className='game-ctn'>
+            <Score />
             <Game /> 
             </div>
+            </>
           }
       </div>
       <div className='footer'>
