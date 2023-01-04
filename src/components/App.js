@@ -81,7 +81,7 @@ function App() {
             </>
           }
       </div>
-      <div className='footer'>
+      <div onClick={ () => console.log(123333)} className='footer'>
         teaver @ 2023
       </div>
     </div>
