@@ -66,10 +66,10 @@ function App() {
           </div>
         </div>
         <div className='navbar-ctn-right'>
-          <div className='navbar-link'>
+          <div className='navbar-link hidden'>
             <a href="#" onClick={ () => console.log('login') }>Login</a>
           </div>
-          <div className='navbar-link'>
+          <div className='navbar-link hidden'>
             <a href="#" onClick={ () => console.log('register') }>Register</a>
           </div>
         </div>
