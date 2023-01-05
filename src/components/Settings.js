@@ -10,6 +10,7 @@ const Settings = () => {
     
     // Check the checkbox if dark mode is ON in localstorage
     useEffect(() => {
+        if(!check_setting("DARK_MODE")){ localStorage.setItem("DARK_MODE","false") }
         if(bool_setting("DARK_MODE")){
             document.getElementById("dark_mode_checkbox").checked = true
         }
@@ -34,8 +35,10 @@ const Settings = () => {
     const settings_tile_color_change = (id) => {
         update_settings("--tile_color",`${tile_colors[id]}`)
         localStorage.setItem("TILE_COLOR_ID",id)
+        
         // Clear all colors
         clear_tile_colorpickers()
+        
         // Apply to the color selected
         var tile_color_elements = document.querySelectorAll(".settings-tile-colorpicker")
         tile_color_elements[id-1].classList.add("selected-color")

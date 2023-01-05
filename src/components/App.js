@@ -43,27 +43,36 @@ function App() {
   return (
     <div className="main-content-ctn">
       <div className='navbar-ctn'>
-        <div className='navbar-logo'></div>
-        {/* Game title */}
-        <div className='navbar-link'>
-          Memory Blocks
+        <div className='navbar-ctn-left'>
+          <div className='navbar-logo'></div>
+          {/* Game title */}
+          <div className='navbar-link'>
+            Memory Blocks
+          </div>
+          {/* Play (home) */}
+          <div className='navbar-link'>
+            <a href="#" onClick={ () => setSettingsVisible(false) }>Play</a>
+          </div>
+          {/* Leaderboard (daily + global) */}
+          <div className='navbar-link'>
+            <a href="#">Leaderboard</a>
+          </div>
+          {/* Github repo */}
+          <div className='navbar-link'>
+            <a href="https://github.com/teavver/memory-blocks">Github</a>
+          </div>
+          <div className='navbar-link'>
+            <a href="#" onClick={ () => toggle_show_settings() }>Settings</a>
+          </div>
         </div>
-        {/* Play (home) */}
-        <div className='navbar-link'>
-          <a href="#" onClick={ () => setSettingsVisible(false) }>Play</a>
+        <div className='navbar-ctn-right'>
+          <div className='navbar-link'>
+            <a href="#" onClick={ () => console.log('login') }>Login</a>
+          </div>
+          <div className='navbar-link'>
+            <a href="#" onClick={ () => console.log('register') }>Register</a>
+          </div>
         </div>
-        {/* Leaderboard (daily + global) */}
-        <div className='navbar-link'>
-          <a href="#">Leaderboard</a>
-        </div>
-        {/* Github repo */}
-        <div className='navbar-link'>
-          <a href="https://github.com/teavver/memory-blocks">Github</a>
-        </div>
-         <div className='navbar-link'>
-          <a href="#" onClick={ () => toggle_show_settings() }>Settings</a>
-        </div>
-
       </div>
       <div id='main-content'>
           { settingsVisible 
