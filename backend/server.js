@@ -2,6 +2,7 @@ import "dotenv/config.js";
 import redis from "redis";
 import express from "express";
 import get_game from "./api/games/get_game.js";
+// import submit_game from "./api/games/submit_game.js";
 
 export const app = express()
 app.use(express.json())
