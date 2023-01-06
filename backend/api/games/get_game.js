@@ -1,10 +1,18 @@
 import { client } from "../../server.js"
 import { app } from "../../server.js"
 
-const get_game = (game_id) => {
-    app.get(`/games/${game_id}`, async (req, res) => {
-        const game_data = await client.json.GET(`game:${game_id}`) 
-        res.status(200).send(game_data)
+const get_game = () => {
+    // ex: localhost:1234/games/game:1234
+    app.get(`/games/:gameid`, async (req, res) => {
+
+        const { gameid } = req.params
+        const game_data = await client.json.GET(gameid)
+        if(game_data === null){
+            res.send({ message: `Couldn't find game ${gameid}` })
+        }
+        else {
+            res.send(game_data)
+        }
     })
 } 
 
