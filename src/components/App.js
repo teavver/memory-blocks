@@ -84,7 +84,6 @@ function App() {
             :
             <>
             <div className='game-ctn'>
-            <Score />
             <Game /> 
             </div>
             </>

@@ -1,12 +1,15 @@
 :root {
+    /* tile colors */
     --tile_color_default: 57, 68, 221;
     --tile_color: 57, 68, 221;
     --tile_color_1: 57, 68, 221;
     --tile_color_2: 255, 255, 0;
     --tile_color_3: 0, 255, 0;
     --tile_color_4: 255, 50, 200;
+    /* dark mode */
     --dark_mode_bg: 34, 40, 49;
     --dark_mode_border: 44, 50, 59;
     --dark_mode_text: 230, 230, 230;
+    /* hint */
     --tile_color_hint: 87, 216, 177;
 }
