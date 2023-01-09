@@ -22,7 +22,6 @@ const Settings = () => {
             color_elements[color_id-1].classList.add("selected-color")
             
             // Update color on render
-            // console.log(tile_colors[color_id])
             document.documentElement.style.setProperty("--tile_color",tile_colors[color_id])
         }
         // Set tile timeout on render
@@ -57,7 +56,6 @@ const Settings = () => {
     const submit_tile_timeout_setting = () => {
         const timeout_elem = document.getElementById("tile-timeout")
         const timeout_value = timeout_elem.value
-        console.log(timeout_value)
 
         if(timeout_value <= 100){
             timeout_elem.classList.add("error")
@@ -79,7 +77,7 @@ const Settings = () => {
                 </li>
                 <li>
                     <div className="settings-tile-colorpicker-ctn">
-                        <p>Tile color</p>
+                        <label htmlFor="">Tile color</label>
                         <div onClick={ () => settings_tile_color_change(1) } className="settings-tile-colorpicker selected-color" id="settings-tile-color-1"></div>
                         <div onClick={ () => settings_tile_color_change(2) } className="settings-tile-colorpicker" id="settings-tile-color-2"></div>
                         <div onClick={ () => settings_tile_color_change(3) } className="settings-tile-colorpicker" id="settings-tile-color-3"></div>

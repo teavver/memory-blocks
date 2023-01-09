@@ -1,4 +1,6 @@
 :root {
+    /* timeout */
+    --tile_timeout: 750ms;
     /* tile colors */
     --tile_color_default: 57, 68, 221;
     --tile_color: 57, 68, 221;

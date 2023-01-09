@@ -45,20 +45,14 @@
 
 .error {
     border: 2px solid red;
-    border-radius: 8px;
+    border-radius: 2px;
 }
 
 ul, li {
-    padding: 4px;
+    padding: 6px;
     list-style: none;
-}
-
-p {
-    font-weight: bold;
-    font-size: 20px;
 }
 
 label {
     font-weight: bold;
-    font-size: 20px;
 }

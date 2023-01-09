@@ -9,11 +9,6 @@ const load_settings = () => {
             document.getElementById("dark_mode_checkbox").checked = true
         }
     }
-    // Eval all other settings
-    for (var i = 0; i < localStorage.length; i++){
-        // console.log(localStorage.getItem())
-    }
-}
-
+} 
 
 export default load_settings

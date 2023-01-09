@@ -41,7 +41,7 @@
 
 .tile-animate {
     background-image:none !important; 
-    animation: tile-animation 1.25s ease-in-out;
+    animation: tile-animation var(--tile_timeout) ease-in-out;
 }
 
 @keyframes tile-animation {

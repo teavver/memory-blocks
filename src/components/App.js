@@ -22,7 +22,7 @@ function App() {
       if(check_setting("TILE_COLOR_ID") === true){
         const color_id = localStorage.getItem("TILE_COLOR_ID")
         const settings_user_color = tile_colors[color_id]
-        updt_css_var("--tile_color",settings_user_color)
+        updt_css_var("--tile_color", settings_user_color)
       }
       return;
     } 

@@ -1,20 +1,20 @@
-import { user_settings } from "../user_settings";
 import { useState, useEffect } from "react";
 import check_setting from "../utils/check_setting";
+import update_settings from "../utils/update_settings";
 import GameTiles from "./GameTiles";
 import GameOver from "./GameOver";
 import Score from "./Score";
 
 // Real-time-needed game variables
-let correct_tiles = []
-let userinput_tiles = []
-let input_index = 0
+let CORRECT_TILES = []
+let USERINPUT_TILES = []
+let INPUT_INDEX = 0
+let TIMEOUT = 750
 
 const Game = () => {
     
-    // User settings
+    // General
     const NUMBER_OF_TILES = 16
-    const SETTINGS_TILE_TIMEOUT = user_settings.timeout
     
     // Returns a Promise that resolves after "ms" Milliseconds
     const timer = ms => new Promise(res => setTimeout(res, ms))
@@ -24,16 +24,28 @@ const Game = () => {
     const [userInputDisabled, setUserInputDisabled] = useState(false)
     const [score, setScore] = useState(0)
     const [highscore, setHighscore] = useState(0)
-    const [gameOver, setGameOver] = useState(false) 
+    const [gameOver, setGameOver] = useState(false)
 
     useEffect(() => {
         get_highscore_on_render()
+        load_timeout()
     }, [])
+
+    const load_timeout = () => {
+        if(check_setting("TILE_TIMEOUT") === false){
+            localStorage.setItem("TILE_TIMEOUT", 1000)   
+            return
+        }
+        TIMEOUT = localStorage.getItem("TILE_TIMEOUT")
+        const timeout_in_ms = TIMEOUT + "ms"
+        update_settings("--tile_timeout",timeout_in_ms)
+    }
     
     const get_highscore_on_render = () => {
         if(check_setting("HIGHSCORE_LOCAL") === false){
             localStorage.setItem("HIGHSCORE_LOCAL", 0)
             setHighscore(0)
+            return
         }
         setHighscore(localStorage.getItem("HIGHSCORE_LOCAL"))
     }
@@ -50,9 +62,9 @@ const Game = () => {
     }
     
     const game_loop = async () => {
-        for (let i = 0; i < correct_tiles.length; i++) {
-            await animate_tile(correct_tiles[i])
-            await timer(SETTINGS_TILE_TIMEOUT + 30) // + 30 to fix anim bug
+        for (let i = 0; i < CORRECT_TILES.length; i++) {
+            await animate_tile(CORRECT_TILES[i])
+            await timer(TIMEOUT*1.025) // 1.025 to fix anim bug
         }
         await timer(50) // For good measure
         setUserInputDisabled(false)
@@ -60,7 +72,7 @@ const Game = () => {
 
     const roll_tile = async () => {
         const rolled_tile = Math.floor(Math.random() * NUMBER_OF_TILES) + 1
-        correct_tiles.push(rolled_tile)
+        CORRECT_TILES.push(rolled_tile)
     }
     
     const animate_tile = async (tile_id) => {
@@ -68,15 +80,14 @@ const Game = () => {
         animate_tile_promise.then((tile_id) => {
             // Add class 'animate' to run the anim
             document.getElementById(tile_id).classList.add("tile-animate")
-            setTimeout(() => { document.getElementById(tile_id).classList.remove("tile-animate"); }, SETTINGS_TILE_TIMEOUT)
+            setTimeout(() => { document.getElementById(tile_id).classList.remove("tile-animate"); }, TIMEOUT)
         })
     }
 
     const eval_round = () => {
-        if(userinput_tiles.length === correct_tiles.length && userinput_tiles.every((value, index) => value === correct_tiles[index])){
-            console.log("round "+score+" GOOD")
-            userinput_tiles = []
-            input_index = 0
+        if(USERINPUT_TILES.length === CORRECT_TILES.length && USERINPUT_TILES.every((value, index) => value === CORRECT_TILES[index])){
+            USERINPUT_TILES = []
+            INPUT_INDEX = 0
             setScore(score => score + 1)
             start_round()
         }
@@ -86,30 +97,32 @@ const Game = () => {
     }
  
     const tile_input = (tile_id) => {
-        userinput_tiles.push(tile_id)
+        USERINPUT_TILES.push(tile_id)
         if(eval_input() === false){ game_over() }
-        if(userinput_tiles.length === correct_tiles.length){ eval_round() }
+        if(USERINPUT_TILES.length === CORRECT_TILES.length){ eval_round() }
     }
 
     const eval_input = () => {
-        if(userinput_tiles[input_index] === correct_tiles[input_index]){
-            input_index++
+        if(USERINPUT_TILES[INPUT_INDEX] === CORRECT_TILES[INPUT_INDEX]){
+            INPUT_INDEX++
             return true
         }
         else return false
     }
 
     const game_over = () => {
-        localStorage.setItem("HIGHSCORE_LOCAL", score)
-        setHighscore(score)
+        if(score > localStorage.getItem("HIGHSCORE_LOCAL")){
+            localStorage.setItem("HIGHSCORE_LOCAL", score)
+            setHighscore(score)
+        }
         setGameOver(true)
-        // submit the game to db
+        // SUBMIT
     }
 
     const reset_game = () => {
-        correct_tiles = []
-        userinput_tiles = []
-        input_index = 0
+        CORRECT_TILES = []
+        USERINPUT_TILES = []
+        INPUT_INDEX = 0
 
         setScore(0)
         setGameStarted(false)
