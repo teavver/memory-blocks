@@ -10,6 +10,7 @@ const Settings = () => {
     
     // Check the checkbox if dark mode is ON in localstorage
     useEffect(() => {
+        if(!check_setting("TILE_TIMEOUT")) { localStorage.setItem("TILE_TIMEOUT", 1000) }
         if(!check_setting("DARK_MODE")){ localStorage.setItem("DARK_MODE","false") }
         if(bool_setting("DARK_MODE")){
             document.getElementById("dark_mode_checkbox").checked = true
@@ -24,6 +25,8 @@ const Settings = () => {
             // console.log(tile_colors[color_id])
             document.documentElement.style.setProperty("--tile_color",tile_colors[color_id])
         }
+        // Set tile timeout on render
+        document.getElementById("tile-timeout").value = localStorage.getItem("TILE_TIMEOUT")
     },[])
     
     const settings_dark_mode_toggle = () => {
@@ -50,6 +53,22 @@ const Settings = () => {
             tile_color_elements[i].classList.remove("selected-color")
         }
     }
+
+    const submit_tile_timeout_setting = () => {
+        const timeout_elem = document.getElementById("tile-timeout")
+        const timeout_value = timeout_elem.value
+        console.log(timeout_value)
+
+        if(timeout_value <= 100){
+            timeout_elem.classList.add("error")
+        }
+        else {
+            if(timeout_elem.classList.contains("error")){
+                timeout_elem.classList.remove("error")
+            }
+            localStorage.setItem("TILE_TIMEOUT", timeout_value)
+        }
+    }
  
     return(
         <div className="settings-content">
@@ -66,6 +85,13 @@ const Settings = () => {
                         <div onClick={ () => settings_tile_color_change(3) } className="settings-tile-colorpicker" id="settings-tile-color-3"></div>
                         <div onClick={ () => settings_tile_color_change(4) } className="settings-tile-colorpicker" id="settings-tile-color-4"></div>
                     </div>    
+                </li>
+                <li>
+                    <div className="tile-timeout-setting-ctn">
+                        <label htmlFor="tile-timeout">Tile timeout (in ms)</label><br />
+                        <input type="number" id="tile-timeout" name="tile-timeout"></input>
+                        <button onClick={() => submit_tile_timeout_setting()} id="tile-timeout-submit">OK</button>
+                    </div>
                 </li>
             </ul>
         </div>

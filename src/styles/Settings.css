@@ -43,6 +43,11 @@
     background-color: rgb(var(--tile_color_4));
 }
 
+.error {
+    border: 2px solid red;
+    border-radius: 8px;
+}
+
 ul, li {
     padding: 4px;
     list-style: none;
@@ -50,4 +55,10 @@ ul, li {
 
 p {
     font-weight: bold;
+    font-size: 20px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 20px;
 }
