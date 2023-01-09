@@ -25,9 +25,17 @@ const Game = () => {
     }
     
     const start_game = async () => {
+        start_round()
+    }
+
+    const start_round = () => {
+        roll_tile()
+        game_loop()
     }
     
     const game_loop = async () => {
+
+
         for (let i = 0; i < correct_tiles.length; i++) {
             await animate_tile(correct_tiles[i])
             await timer(SETTINGS_TILE_TIMEOUT + 30) // + 30 to fix anim bug
@@ -48,20 +56,28 @@ const Game = () => {
         });
     }
  
-    const tile_input = (tile_id) => {
-        userinput_tiles.push(tile_id)
-    }
-
+    
     const eval_round = () => {
         if(userinput_tiles.length === correct_tiles.length && userinput_tiles.every((value, index) => value === correct_tiles[index])){
+            console.log("GOOD")
+            userinput_tiles = []
+            start_round()
         }
         else {
+            console.log("GAME OVER")
         }
+    }
+ 
+    const tile_input = (tile_id) => {
+        userinput_tiles.push(tile_id)
+        console.log(userinput_tiles)
+        console.log(correct_tiles)
+        if(userinput_tiles.length === correct_tiles.length){ eval_round() }
     }
 
     const game_over = () => {
     }
-
+    
     return (
         <>
         <Score score={score}></Score>
