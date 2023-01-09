@@ -21,7 +21,7 @@ const Settings = () => {
             color_elements[color_id-1].classList.add("selected-color")
             
             // Update color on render
-            console.log(tile_colors[color_id])
+            // console.log(tile_colors[color_id])
             document.documentElement.style.setProperty("--tile_color",tile_colors[color_id])
         }
     },[])

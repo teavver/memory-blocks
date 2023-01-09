@@ -39,14 +39,6 @@
     background-color: rgba(var(--tile_color), 0.65);
 }
 
-.game-tile-click-correct {
-    /* light purple border */
-}
-
-.game-tile-click-incorrect {
-    /* red-ish border */
-}
-
 .tile-animate {
     background-image:none !important; 
     animation: tile-animation 1.25s ease-in-out;
@@ -68,4 +60,38 @@
     background-color: rgb(var(--dark_mode_bg));
     border-color: rgb(var(--dark_mode_border));
     color: rgb(var(--dark_mode_text));
+}
+
+.game-over-ctn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25vw;
+    height: 45vh;
+    border: 5px solid rgba(0,0,0,0.11);
+    border-radius: 8px;
+}
+
+.game-over-title {
+    font-weight: bold;
+}
+
+.game-over-scores {
+    font-weight: bold;
+    font-size: 0.75em;
+}
+
+.game-over-play-again {
+    width: 50%;
+    align-self: center;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    border: 5px solid rgba(0,0,0,0.11);
+    font-weight: bold;
+    cursor: pointer;
 }

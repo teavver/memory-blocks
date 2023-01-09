@@ -1,8 +1,9 @@
-import GameTiles from "./GameTiles";
-import { useState, useEffect } from "react";
 import { user_settings } from "../user_settings";
-import Score from "./Score";
+import { useState, useEffect } from "react";
 import check_setting from "../utils/check_setting";
+import GameTiles from "./GameTiles";
+import GameOver from "./GameOver";
+import Score from "./Score";
 
 // Real-time-needed game variables
 let correct_tiles = []
@@ -80,7 +81,7 @@ const Game = () => {
             start_round()
         }
         else {
-            localStorage.setItem("HIGHSCORE_LOCAL", score)
+            game_over()
         }
     }
  
@@ -99,21 +100,40 @@ const Game = () => {
     }
 
     const game_over = () => {
+        localStorage.setItem("HIGHSCORE_LOCAL", score)
+        setHighscore(score)
         setGameOver(true)
-        // submit the game
+        // submit the game to db
+    }
+
+    const reset_game = () => {
+        correct_tiles = []
+        userinput_tiles = []
+        input_index = 0
+
+        setScore(0)
+        setGameStarted(false)
+        setGameOver(false)
+        setUserInputDisabled(true)
     }
   
     return (
         <>
-        <Score score={score} highscore={highscore} ></Score>
+        { gameOver
+        ?
+        <GameOver score={score} highscore={highscore} 
+        onClick={ () => reset_game() }/>
+        : 
+        <>
+        <Score score={score} highscore={highscore} />
         <div className="game-tiles-ctn">
             <div className="game-tile-ctn">
-                <GameTiles
-                onClick={ userInputDisabled ? {} : tile_input }
-                />
+                <GameTiles onClick={ userInputDisabled ? {} : tile_input } />
             </div>
         </div>
         <button className={ gameStarted ? "game-start-btn hidden" : "game-start-btn" } onClick={ () => start_game() }> Play </button>
+        </>
+        }
         </>
     );
 }
