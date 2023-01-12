@@ -4,6 +4,8 @@ import update_settings from "../utils/update_settings";
 import GameTiles from "./GameTiles";
 import GameOver from "./GameOver";
 import Score from "./Score";
+import POST_game from "../utils/api/POST_game";
+import create_game_data from "../utils/game/create_game_data";
 
 // Real-time-needed game variables
 let CORRECT_TILES = []
@@ -21,7 +23,7 @@ const Game = () => {
     
     // States
     const [gameStarted, setGameStarted] = useState(false)
-    const [userInputDisabled, setUserInputDisabled] = useState(false)
+    const [userInputDisabled, setUserInputDisabled] = useState(true)
     const [score, setScore] = useState(0)
     const [highscore, setHighscore] = useState(0)
     const [gameOver, setGameOver] = useState(false)
@@ -29,20 +31,23 @@ const Game = () => {
     useEffect(() => {
         get_highscore_on_render()
         load_timeout()
+
+        testPOST()
     }, [])
 
     const load_timeout = () => {
-        if(check_setting("TILE_TIMEOUT") === false){
+        if(!check_setting("TILE_TIMEOUT")){
             localStorage.setItem("TILE_TIMEOUT", 1000)   
             return
         }
         TIMEOUT = localStorage.getItem("TILE_TIMEOUT")
         const timeout_in_ms = TIMEOUT + "ms"
-        update_settings("--tile_timeout",timeout_in_ms)
+        update_settings("--tile_timeout", timeout_in_ms)
     }
-    
+
     const get_highscore_on_render = () => {
-        if(check_setting("HIGHSCORE_LOCAL") === false){
+        // If there's no highscore, set it to 0
+        if(!check_setting("HIGHSCORE_LOCAL")){
             localStorage.setItem("HIGHSCORE_LOCAL", 0)
             setHighscore(0)
             return
@@ -64,7 +69,7 @@ const Game = () => {
     const game_loop = async () => {
         for (let i = 0; i < CORRECT_TILES.length; i++) {
             await animate_tile(CORRECT_TILES[i])
-            await timer(TIMEOUT*1.025) // 1.025 to fix anim bug
+            await timer(TIMEOUT * 1.025) // 1.025 to fix anim bug
         }
         await timer(50) // For good measure
         setUserInputDisabled(false)
@@ -116,7 +121,23 @@ const Game = () => {
             setHighscore(score)
         }
         setGameOver(true)
-        // SUBMIT
+
+        // POST game
+
+        // const game_data = create_game_data(CORRECT_TILES, USERINPUT_TILES.pop(), score)
+        // POST_game()
+    }
+
+    const testPOST = () => {
+        const game_data = {
+            game_sequence: [1,2,3],
+            last_tile: 3,
+            score: 4,
+            user_id: 1234,
+            game_id: 123456
+        }
+
+        POST_game(game_data)
     }
 
     const reset_game = () => {

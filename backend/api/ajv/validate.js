@@ -5,7 +5,6 @@ const validate = (schema, object) => {
     const valid = ajv.validate(schema,object)
     if(!valid){ console.error(ajv.errors); return false }
     if(valid){
-        // console.log(`object validated`)
         return true
     }
 }
