@@ -14,27 +14,26 @@ const Leaderboard = () => {
 
     const load_leaderboard = async () => {
         const leaderboardData = await GET_leaderboard()
-        console.log(leaderboardData)
-        setLeaderboard(leaderboardData)
+        setLeaderboard(JSON.parse(leaderboardData))
         setLoading(false)
     }
             
     return(
         <div className="leaderboard-content">
             <div className="leaderboard-title">
-                <h2>Global Leaderboard</h2>
+                <h3>Global Leaderboard</h3>
             </div>
             <div className="leaderboard-list">
                 { loading ?
                 <h2>Loading data...</h2>
                 :
                 // the leaderboard
-                // <ul>
-                //     { leaderboard.map((score, position) => {
-                //         return <li key={position}>{score}</li>
-                //     })}
-                // </ul>
-                <h2>{leaderboard}</h2>
+                <ul>
+                    { leaderboard.map((item, index) => {
+                        return <li key={index}>{`${index + 1}. User: ${item.user_id},   Score: ${item.score}`}</li>
+                    })}
+                </ul>
+                // <h2>{leaderboard}</h2>
                 }
             </div>
         </div>

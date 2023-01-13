@@ -5,6 +5,7 @@
     border: 5px solid rgba(0,0,0,0.11);
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .leaderboard-content {
@@ -13,13 +14,11 @@
 
 .leaderboard-title {
     font-weight: bold;
+    text-decoration: underline;
 }
 
 .leaderboard-list {
+    display: flex;
+    justify-content: center;
     height: 75%;
-    background-color: rgba(0,0,0,0.11);
-}
-
-li {
-    list-style: decimal;
 }
