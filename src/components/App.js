@@ -1,15 +1,17 @@
 import '../styles/app.css';
 import "../styles/variables.css";
 import Game from './Game';
-import Score from './Score';
 import Settings from './Settings';
-import { tile_colors } from '../utils/tile_colors';
+import Leaderboard from './Leaderboard';
 import updt_css_var from '../utils/updt_css_var';
 import check_setting from '../utils/check_setting';
 import load_settings from '../utils/load_settings';
+import { tile_colors } from '../utils/tile_colors';
 import { useEffect, useState, useRef } from 'react';
 
 function App() {
+
+  const [leaderboardVisible, setLeaderboardVisible] = useState(false)
   const [settingsVisible, setSettingsVisible] = useState(false)
 
   const isFirstRender = useRef(true)
@@ -28,14 +30,22 @@ function App() {
     } 
   }, [])
 
-  const toggle_show_settings = () => {
-    setSettingsVisible(!settingsVisible)
+  const CloseLeaderboardBtn = () => {
+     <div className='close-settings-btn-ctn'>
+        <button className='navbar-link'
+        onClick={ () => {
+          setLeaderboardVisible(false)
+        }}> X </button>
+      </div>
   }
   
   const CloseSettingsBtn = () => {
     return (
       <div className='close-settings-btn-ctn'>
-        <button className='navbar-link' onClick={ () => toggle_show_settings() }>X</button>
+        <button className='navbar-link'
+        onClick={ () => {
+          setSettingsVisible(false)
+        }}> X </button>
       </div>
     )
   }
@@ -51,18 +61,28 @@ function App() {
           </div>
           {/* Play (home) */}
           <div className='navbar-link'>
-            <a href="#" onClick={ () => setSettingsVisible(false) }>Play</a>
+            <a href="#" onClick={ () => {
+              setSettingsVisible(false)
+              setLeaderboardVisible(false)
+              }}>Play</a>
           </div>
           {/* Leaderboard (daily + global) */}
           <div className='navbar-link'>
-            <a href="#">Leaderboard</a>
+            <a href="#" onClick={ () => {
+              setLeaderboardVisible(true)
+              setSettingsVisible(false)
+            }}>Leaderboard</a>
           </div>
           {/* Github repo */}
           <div className='navbar-link'>
             <a href="https://github.com/teavver/memory-blocks">Github</a>
           </div>
+          {/* Settings */}
           <div className='navbar-link'>
-            <a href="#" onClick={ () => toggle_show_settings() }>Settings</a>
+            <a href="#" onClick={ () => {
+              setSettingsVisible(true)
+              setLeaderboardVisible(false)
+            }}>Settings</a>
           </div>
         </div>
         <div className='navbar-ctn-right'>
@@ -75,21 +95,27 @@ function App() {
         </div>
       </div>
       <div id='main-content'>
-          { settingsVisible 
+        { leaderboardVisible
+        ?
+        <div className='leaderboard-ctn'>
+        <Leaderboard />
+        </div>
+        :
+          settingsVisible 
             ?
             <div className='settings-ctn'>
             <CloseSettingsBtn />
             <Settings />
             </div>
-            :
+            : 
             <>
             <div className='game-ctn'>
             <Game /> 
             </div>
             </>
-          }
+        }
       </div>
-      <div onClick={ () => console.log(123333)} className='footer'>
+      <div className='footer'>
         teaver @ 2023
       </div>
     </div>
