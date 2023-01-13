@@ -1,16 +1,11 @@
 import { Router } from "express";
+import { game_schema } from "../ajv/schemas/game_schema.js";
 import redis_key_exists from "../../redis/calls/redis_key_exists.js";
 import redis_get_game from "../../redis/calls/redis_get_game.js";
-// import redis_add_game from "../../redis/calls/redis_add_game.js";
-// import validate from "../ajv/validate.js";
-// import { game_schema } from "../ajv/schemas/game_schema.js";
+import validate from "../ajv/validate.js";
+import redis_add_game from "../../redis/calls/redis_add_game.js";
 
 const games = Router()
-
-// games.use(function(req, res, next) {
-//     console.log("Connecting...")
-//     next()
-// })
 
 const GET_game = async (req, res) => {
 
@@ -23,12 +18,25 @@ const POST_game = async (req, res) => {
     const game_id = req.params
     const game_data = req.body
 
-    // Check duplicate
-    const exists = await redis_key_exists(game_id.id)
-    console.log(exists)
+    console.log(game_data)
     
-    // console.log(game_id.id)
-    // console.log(game_data)
+    // Check duplicate
+    const exists = await redis_key_exists("game:"+game_id.id)
+    if(exists === 1){
+        // Duplicate -- re-generate game_id again?
+        console.error("Trying to POST duplicate")
+        return
+    }
+
+    const valid = validate(game_schema, game_data)
+    console.log("valid: "+valid)
+
+    if(valid){
+        await redis_add_game(game_data)
+        console.log("POST success")
+        return
+    }
+    console.error("Couldn't validate data")
 }
 
 games.route('/games/:id')

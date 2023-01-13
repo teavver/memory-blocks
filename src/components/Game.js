@@ -5,7 +5,6 @@ import GameTiles from "./GameTiles";
 import GameOver from "./GameOver";
 import Score from "./Score";
 import POST_game from "../utils/api/POST_game";
-import create_game_data from "../utils/game/create_game_data";
 
 // Real-time-needed game variables
 let CORRECT_TILES = []
@@ -31,8 +30,6 @@ const Game = () => {
     useEffect(() => {
         get_highscore_on_render()
         load_timeout()
-
-        testPOST()
     }, [])
 
     const load_timeout = () => {
@@ -121,23 +118,7 @@ const Game = () => {
             setHighscore(score)
         }
         setGameOver(true)
-
-        // POST game
-
-        // const game_data = create_game_data(CORRECT_TILES, USERINPUT_TILES.pop(), score)
-        // POST_game()
-    }
-
-    const testPOST = () => {
-        const game_data = {
-            game_sequence: [1,2,3],
-            last_tile: 3,
-            score: 4,
-            user_id: 1234,
-            game_id: 123456
-        }
-
-        POST_game(game_data)
+        evaluate_game()
     }
 
     const reset_game = () => {
@@ -149,6 +130,17 @@ const Game = () => {
         setGameStarted(false)
         setGameOver(false)
         setUserInputDisabled(true)
+    }
+
+    const evaluate_game = () => {
+        const game_data = {
+            "game_sequence": CORRECT_TILES,
+            "last_tile": USERINPUT_TILES.pop(),
+            "score": score,
+            "user_id": 1337,
+        }
+
+        POST_game(game_data)
     }
   
     return (
