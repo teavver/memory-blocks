@@ -3,10 +3,12 @@ import cors from "cors";
 import redis from "redis";
 import express from "express";
 import games from "./api/routes/games.js";
+import leaderboard from "./api/routes/leaderboard.js";
 
 export const app = express()
 app.use(cors())
 app.use(express.json())
+app.use(leaderboard)
 app.use(games)
 
 const PORT = 3000
