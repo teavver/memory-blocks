@@ -66,9 +66,8 @@ const Game = () => {
     const game_loop = async () => {
         for (let i = 0; i < CORRECT_TILES.length; i++) {
             await animate_tile(CORRECT_TILES[i])
-            await timer(TIMEOUT * 1.025) // 1.025 to fix anim bug
+            await timer(TIMEOUT * 1.035) // 1.035 To fix anim bug, for good measure
         }
-        await timer(50) // For good measure
         setUserInputDisabled(false)
     }
 
@@ -80,6 +79,7 @@ const Game = () => {
     const animate_tile = async (tile_id) => {
         const animate_tile_promise = Promise.resolve(tile_id)
         animate_tile_promise.then((tile_id) => {
+
             // Add class 'animate' to run the anim
             document.getElementById(tile_id).classList.add("tile-animate")
             setTimeout(() => { document.getElementById(tile_id).classList.remove("tile-animate"); }, TIMEOUT)
@@ -87,6 +87,7 @@ const Game = () => {
     }
 
     const eval_round = () => {
+        // Check if USERINPUT array is equal to CORRECT array, if round is OK then reset USERINPUT for next round
         if(USERINPUT_TILES.length === CORRECT_TILES.length && USERINPUT_TILES.every((value, index) => value === CORRECT_TILES[index])){
             USERINPUT_TILES = []
             INPUT_INDEX = 0
@@ -133,13 +134,14 @@ const Game = () => {
     }
 
     const evaluate_game = () => {
+
+        const user_id = parseInt(localStorage.getItem("USER_ID"))
         const game_data = {
             "game_sequence": CORRECT_TILES,
             "last_tile": USERINPUT_TILES.pop(),
             "score": score,
-            "user_id": 1337,
+            "user_id": user_id,
         }
-
         POST_game(game_data)
     }
   
@@ -147,17 +149,33 @@ const Game = () => {
         <>
         { gameOver
         ?
-        <GameOver score={score} highscore={highscore} 
-        onClick={ () => reset_game() }/>
-        : 
+            <GameOver score={score} highscore={highscore} 
+            onClick={ () => reset_game() }/>
+        :
         <>
-        <Score score={score} highscore={highscore} />
+            <Score
+                score={score}
+                highscore={highscore}
+            />
         <div className="game-tiles-ctn">
             <div className="game-tile-ctn">
                 <GameTiles onClick={ userInputDisabled ? {} : tile_input } />
             </div>
         </div>
-        <button className={ gameStarted ? "game-start-btn hidden" : "game-start-btn" } onClick={ () => start_game() }> Play </button>
+            <button
+            className=
+                { gameStarted 
+                ?
+                // If user input is disabled (player's turn), add an indicator line
+                userInputDisabled === false
+                ?
+                "game-user-input-line" : "hidden"
+                :
+                "game-start-btn monospace bold"
+                }
+            onClick={ () => start_game() }>
+            Play
+            </button>
         </>
         }
         </>

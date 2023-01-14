@@ -33,7 +33,6 @@ const Leaderboard = () => {
                         return <li key={index}>{`${index + 1}. User: ${item.user_id},   Score: ${item.score}`}</li>
                     })}
                 </ul>
-                // <h2>{leaderboard}</h2>
                 }
             </div>
         </div>

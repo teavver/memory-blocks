@@ -14,31 +14,26 @@ function App() {
   const [leaderboardVisible, setLeaderboardVisible] = useState(false)
   const [settingsVisible, setSettingsVisible] = useState(false)
 
+  const user_id = localStorage.getItem("USER_ID")
   const isFirstRender = useRef(true)
 
   // Check user settings on page load
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
+
       load_settings()
+
       if(check_setting("TILE_COLOR_ID") === true){
         const color_id = localStorage.getItem("TILE_COLOR_ID")
         const settings_user_color = tile_colors[color_id]
         updt_css_var("--tile_color", settings_user_color)
       }
+
       return;
     } 
   }, [])
 
-  const CloseLeaderboardBtn = () => {
-     <div className='close-settings-btn-ctn'>
-        <button className='navbar-link'
-        onClick={ () => {
-          setLeaderboardVisible(false)
-        }}> X </button>
-      </div>
-  }
-  
   const CloseSettingsBtn = () => {
     return (
       <div className='close-settings-btn-ctn'>
@@ -48,6 +43,11 @@ function App() {
         }}> X </button>
       </div>
     )
+  }
+
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
   }
 
   return (
@@ -61,36 +61,39 @@ function App() {
           </div>
           {/* Play (home) */}
           <div className='navbar-link'>
-            <a href="#" onClick={ () => {
+            <p className='link monospace bold' onClick={ () => {
               setSettingsVisible(false)
               setLeaderboardVisible(false)
-              }}>Play</a>
+              }}> Play </p>
           </div>
           {/* Leaderboard (daily + global) */}
           <div className='navbar-link'>
-            <a href="#" onClick={ () => {
+            <p className='link monospace bold' onClick={ () => {
               setLeaderboardVisible(true)
               setSettingsVisible(false)
-            }}>Leaderboard</a>
+            }}>Leaderboard</p>
           </div>
           {/* Github repo */}
           <div className='navbar-link'>
-            <a href="https://github.com/teavver/memory-blocks">Github</a>
+            <p className='link monospace bold'
+            onClick={
+              () => openInNewTab("https://github.com/teavver/memory-blocks")}>Github</p>
           </div>
           {/* Settings */}
           <div className='navbar-link'>
-            <a href="#" onClick={ () => {
+            <p className='link monospace bold' onClick={ () => {
               setSettingsVisible(true)
               setLeaderboardVisible(false)
-            }}>Settings</a>
+            }}>Settings</p>
           </div>
         </div>
+        {/* ACCOUNTS SOON */}
         <div className='navbar-ctn-right'>
           <div className='navbar-link hidden'>
-            <a href="#" onClick={ () => console.log('login') }>Login</a>
+            <p onClick={ () => console.log('login') }> Login </p>
           </div>
           <div className='navbar-link hidden'>
-            <a href="#" onClick={ () => console.log('register') }>Register</a>
+            <p onClick={ () => console.log('register') }>Register</p>
           </div>
         </div>
       </div>
@@ -116,7 +119,7 @@ function App() {
         }
       </div>
       <div className='footer'>
-        teaver @ 2023
+        teaver @ 2023 | player id: {user_id}
       </div>
     </div>
     );

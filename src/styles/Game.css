@@ -21,13 +21,10 @@
     width: 50%;
     align-self: center;
     height: 32px;
-    margin: 0;
-    padding: 0;
     margin-top: 14px;
     margin-bottom: 14px;
     border-radius: 8px;
     border: 5px solid rgba(0,0,0,0.11);
-    font-weight: bold;
     cursor: pointer;
 }
 
@@ -73,25 +70,34 @@
     border-radius: 8px;
 }
 
-.game-over-title {
-    font-weight: bold;
-}
-
-.game-over-scores {
-    font-weight: bold;
-    font-size: 0.75em;
-}
-
 .game-over-play-again {
-    width: 50%;
+    width: 25%;
     align-self: center;
     height: 32px;
-    margin: 0;
-    padding: 0;
     margin-top: 14px;
     margin-bottom: 14px;
     border-radius: 8px;
     border: 5px solid rgba(0,0,0,0.11);
-    font-weight: bold;
     cursor: pointer;
 }
+
+.game-user-input-line {
+    margin-top: 10px;
+    margin-left: 25%;
+    width: 50%;
+    height: 5px;
+    border: none;
+    user-select: none;
+    background-color: rgba(var(--tile_color_hint), 0.95);
+    font-size: 0px;
+    border-radius: 8px;
+}
+
+.monospace {
+    font-family: monospace;
+}
+
+.bold {
+    font-weight: bold;
+}
+

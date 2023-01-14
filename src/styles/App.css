@@ -86,3 +86,17 @@ body {
   margin-right: 20%;
   margin-bottom: 2.5%;
 }
+
+.monospace {
+  font-family: monospace;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}

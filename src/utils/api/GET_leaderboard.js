@@ -6,8 +6,8 @@ const GET_leaderboard = async () => {
         const data = JSON.stringify(response.data)
         console.log(data)
         return data
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
     }
 }
 
