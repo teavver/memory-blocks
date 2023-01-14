@@ -10,7 +10,7 @@ import POST_game from "../utils/api/POST_game";
 let CORRECT_TILES = []
 let USERINPUT_TILES = []
 let INPUT_INDEX = 0
-let TIMEOUT = 750
+let TIMEOUT = 500
 
 const Game = (props) => {
     
@@ -28,6 +28,7 @@ const Game = (props) => {
     const [gameOver, setGameOver] = useState(false)
 
     // Helper state for managing leaving the game with nav links
+    // eslint-disable-next-line
     const [triggerGameReset, setTriggerGameReset] = useState(props.triggerGameReset)
 
     useEffect(() => {

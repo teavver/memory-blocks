@@ -21,11 +21,11 @@ const Leaderboard = () => {
     return(
         <div className="leaderboard-content">
             <div className="leaderboard-title">
-                <h3>Global Leaderboard</h3>
+                <h2>Global Leaderboard</h2>
             </div>
             <div className="leaderboard-list">
                 { loading ?
-                <h2>Loading data...</h2>
+                <h3>Loading data...</h3>
                 :
                 // the leaderboard
                 <ul>

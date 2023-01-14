@@ -71,9 +71,13 @@
 }
 
 .game-over-play-again {
-    width: 25%;
+    display: flex;
+    word-break: break-all;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
     align-self: center;
-    height: 32px;
+    height: 42px;
     margin-top: 14px;
     margin-bottom: 14px;
     border-radius: 8px;
