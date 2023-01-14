@@ -11,10 +11,15 @@ import { useEffect, useState, useRef } from 'react';
 
 function App() {
 
+  // States
   const [leaderboardVisible, setLeaderboardVisible] = useState(false)
   const [settingsVisible, setSettingsVisible] = useState(false)
+  const [triggerGameReset, setTriggerGameReset] = useState(false)
 
+  // LocalStorage
   const user_id = localStorage.getItem("USER_ID")
+
+  // Ref
   const isFirstRender = useRef(true)
 
   // Check user settings on page load
@@ -39,6 +44,7 @@ function App() {
       <div className='close-settings-btn-ctn'>
         <button className='navbar-link'
         onClick={ () => {
+          setTriggerGameReset(true)
           setSettingsVisible(false)
         }}> X </button>
       </div>
@@ -46,6 +52,7 @@ function App() {
   }
 
   const openInNewTab = (url) => {
+    // https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
     if (newWindow) newWindow.opener = null
   }
@@ -62,6 +69,7 @@ function App() {
           {/* Play (home) */}
           <div className='navbar-link'>
             <p className='link monospace bold' onClick={ () => {
+              setTriggerGameReset(true)
               setSettingsVisible(false)
               setLeaderboardVisible(false)
               }}> Play </p>
@@ -69,6 +77,7 @@ function App() {
           {/* Leaderboard (daily + global) */}
           <div className='navbar-link'>
             <p className='link monospace bold' onClick={ () => {
+              setTriggerGameReset(true)
               setLeaderboardVisible(true)
               setSettingsVisible(false)
             }}>Leaderboard</p>
@@ -82,6 +91,7 @@ function App() {
           {/* Settings */}
           <div className='navbar-link'>
             <p className='link monospace bold' onClick={ () => {
+              setTriggerGameReset(true)
               setSettingsVisible(true)
               setLeaderboardVisible(false)
             }}>Settings</p>
@@ -113,7 +123,7 @@ function App() {
             : 
             <>
             <div className='game-ctn'>
-            <Game /> 
+            <Game triggerGameReset={triggerGameReset} /> 
             </div>
             </>
         }

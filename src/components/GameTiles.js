@@ -1,25 +1,16 @@
 import GameTile from "./Tile"
 
 const GameTiles = (props) => {
+
+    const num_of_tiles = 16
+    const tiles = []
+
+    for (let i = 1; i < (num_of_tiles + 1); i++) {
+        tiles.push( <GameTile key={i} id={i} onClick={props.onClick} /> )
+    }
+
     return(
-        <>
-        <GameTile id={1} onClick={props.onClick}/>
-        <GameTile id={2} onClick={props.onClick}/>
-        <GameTile id={3} onClick={props.onClick}/>
-        <GameTile id={4} onClick={props.onClick}/>
-        <GameTile id={5} onClick={props.onClick}/>
-        <GameTile id={6} onClick={props.onClick}/>
-        <GameTile id={7} onClick={props.onClick}/>
-        <GameTile id={8} onClick={props.onClick}/>
-        <GameTile id={9} onClick={props.onClick}/>
-        <GameTile id={10} onClick={props.onClick}/>
-        <GameTile id={11} onClick={props.onClick}/>
-        <GameTile id={12} onClick={props.onClick}/>
-        <GameTile id={13} onClick={props.onClick}/>
-        <GameTile id={14} onClick={props.onClick}/>
-        <GameTile id={15} onClick={props.onClick}/>
-        <GameTile id={16} onClick={props.onClick}/>
-        </>
+        tiles
     )
 }
 

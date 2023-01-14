@@ -12,7 +12,7 @@ let USERINPUT_TILES = []
 let INPUT_INDEX = 0
 let TIMEOUT = 750
 
-const Game = () => {
+const Game = (props) => {
     
     // General
     const NUMBER_OF_TILES = 16
@@ -27,10 +27,18 @@ const Game = () => {
     const [highscore, setHighscore] = useState(0)
     const [gameOver, setGameOver] = useState(false)
 
+    // Helper state for managing leaving the game with nav links
+    const [triggerGameReset, setTriggerGameReset] = useState(props.triggerGameReset)
+
     useEffect(() => {
         get_highscore_on_render()
         load_timeout()
     }, [])
+
+    useEffect(() => {
+        // Reset all game data if user leaves mid-game
+        reset_game()
+    }, [triggerGameReset])
 
     const load_timeout = () => {
         if(!check_setting("TILE_TIMEOUT")){
@@ -101,7 +109,9 @@ const Game = () => {
  
     const tile_input = (tile_id) => {
         USERINPUT_TILES.push(tile_id)
+        // Evaluate input for each tile click
         if(eval_input() === false){ game_over() }
+        // Eval round
         if(USERINPUT_TILES.length === CORRECT_TILES.length){ eval_round() }
     }
 
@@ -112,27 +122,7 @@ const Game = () => {
         }
         else return false
     }
-
-    const game_over = () => {
-        if(score > localStorage.getItem("HIGHSCORE_LOCAL")){
-            localStorage.setItem("HIGHSCORE_LOCAL", score)
-            setHighscore(score)
-        }
-        setGameOver(true)
-        evaluate_game()
-    }
-
-    const reset_game = () => {
-        CORRECT_TILES = []
-        USERINPUT_TILES = []
-        INPUT_INDEX = 0
-
-        setScore(0)
-        setGameStarted(false)
-        setGameOver(false)
-        setUserInputDisabled(true)
-    }
-
+    
     const evaluate_game = () => {
 
         const user_id = parseInt(localStorage.getItem("USER_ID"))
@@ -143,6 +133,26 @@ const Game = () => {
             "user_id": user_id,
         }
         POST_game(game_data)
+    }
+
+    const reset_game = () => {
+        CORRECT_TILES = []
+        USERINPUT_TILES = []
+        INPUT_INDEX = 0
+        
+        setScore(0)
+        setGameStarted(false)
+        setGameOver(false)
+        setUserInputDisabled(true)
+    }
+    
+    const game_over = () => {
+        if(score > localStorage.getItem("HIGHSCORE_LOCAL")){
+            localStorage.setItem("HIGHSCORE_LOCAL", score)
+            setHighscore(score)
+        }
+        setGameOver(true)
+        evaluate_game()
     }
   
     return (
@@ -159,7 +169,7 @@ const Game = () => {
             />
         <div className="game-tiles-ctn">
             <div className="game-tile-ctn">
-                <GameTiles onClick={ userInputDisabled ? {} : tile_input } />
+                <GameTiles onClick={ userInputDisabled ? () => undefined : tile_input } />
             </div>
         </div>
             <button
