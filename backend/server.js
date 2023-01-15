@@ -16,8 +16,8 @@ const PORT = 3000
 export const client = redis.createClient({
     url: `redis://${process.env.USER}:${process.env.PASSWORD}@${process.env.ENDPOINT}:${process.env.PORT}`
 })
+client.connect()
 
-await client.connect()
 const user = await client.aclWhoAmI()
 console.log(`Logged to redis as "${user}"`)
 
