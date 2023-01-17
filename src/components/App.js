@@ -1,4 +1,4 @@
-import '../styles/app.css';
+import '../styles/App.css';
 import "../styles/variables.css";
 import Game from './Game';
 import Settings from './Settings';
@@ -25,7 +25,7 @@ function App() {
   // Check user settings on page load
   useEffect(() => {
     if (isFirstRender.current) {
-      isFirstRender.current = false;
+      isFirstRender.current = false
 
       load_settings()
 

@@ -5,6 +5,8 @@ import express from "express";
 import games from "./api/routes/games.js";
 import leaderboard from "./api/routes/leaderboard.js";
 
+import store_data from "./jupyter/utils/store_data.js";
+
 dotenv.config()
 
 export const app = express()
@@ -17,7 +19,7 @@ app.use(games)
 const PORT = 3000
 
 export const client = redis.createClient({
-    url: `redis://${process.env.USER}:${process.env.PASSWORD}@${process.env.ENDPOINT}:${process.env.PORT}`
+    url: `redis://${process.env.DBUSER}:${process.env.PASSWORD}@${process.env.ENDPOINT}:${process.env.PORT}`
 })
 client.connect()
 
@@ -28,6 +30,8 @@ app.listen(PORT, () => {
     console.log(`Express server started on http://localhost:${PORT}`)
 })
 
-app.get('/', (req, res) => {
-    res.send('Memory Blocks API')
-})
+// app.get('/', (req, res) => {
+//     res.send('Memory Blocks API')
+// })
+
+store_data()
