@@ -7,30 +7,23 @@ import redis_add_game from "../../redis/calls/redis_add_game.js";
 
 const games = Router()
 
+// Get single game
 const GET_game = async (req, res) => {
-
     const game_id = req.params
-    res.send(await redis_get_game(game_id.id))
+    const res_data = await redis_get_game(game_id.id)
+    if(res_data === null){ res.send(`couldn't find game ${game_id}`); return }
+    res.send(res_data)
 }
 
 const POST_game = async (req, res) => {
-    
     const game_id = req.params
     const game_data = req.body
-
-    console.log(game_data)
     
     // Check duplicate
     const exists = await redis_key_exists("game:"+game_id.id)
-    if(exists === 1){
-        // Duplicate -- re-generate game_id again?
-        console.error("Trying to POST duplicate")
-        return
-    }
+    if(exists === 1){ console.error("Trying to POST duplicate"); return }
 
     const valid = validate(game_schema, game_data)
-    console.log("valid: "+valid)
-
     if(valid){
         await redis_add_game(game_data)
         console.log("POST success")

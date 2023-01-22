@@ -3,9 +3,12 @@ import cors from "cors";
 import redis from "redis";
 import express from "express";
 import games from "./api/routes/games.js";
+import users from "./api/routes/users.js";
+import heatmaps from "./api/routes/heatmaps.js";
 import leaderboard from "./api/routes/leaderboard.js";
 
-import store_data from "./jupyter/utils/store_data.js";
+import redis_create_heatmap from "./redis/calls/redis_create_heatmap.js";
+import redis_update_heatmap from "./redis/calls/redis_update_heatmap.js";
 
 dotenv.config()
 
@@ -14,13 +17,16 @@ export const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(leaderboard)
+app.use(heatmaps)
 app.use(games)
+app.use(users)
 
 const PORT = 3000
 
 export const client = redis.createClient({
     url: `redis://${process.env.DBUSER}:${process.env.PASSWORD}@${process.env.ENDPOINT}:${process.env.PORT}`
 })
+
 client.connect()
 
 const user = await client.aclWhoAmI()
@@ -30,8 +36,9 @@ app.listen(PORT, () => {
     console.log(`Express server started on http://localhost:${PORT}`)
 })
 
-// app.get('/', (req, res) => {
-//     res.send('Memory Blocks API')
-// })
+app.get('/', (req, res) => {
+    res.send('Memory Blocks API')
+})
 
-store_data()
+// redis_create_heatmap(1337)
+redis_update_heatmap(1337,0)

@@ -1,4 +1,4 @@
-import '../styles/Game.css'
+// import '../styles/game.css'
 
 const Tile = (props) => {
     return(

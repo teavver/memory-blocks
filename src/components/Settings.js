@@ -4,7 +4,7 @@ import bool_setting from "../utils/bool_setting";
 import check_setting from "../utils/check_setting";
 import { useEffect } from "react";
 import { tile_colors } from "../utils/tile_colors";
-import "../styles/Settings.css";
+import "../styles/settings.css";
 
 const Settings = () => {
     

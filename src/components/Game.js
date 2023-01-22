@@ -1,3 +1,4 @@
+import "../styles/game.css"
 import { useState, useEffect } from "react";
 import check_setting from "../utils/check_setting";
 import update_settings from "../utils/update_settings";
@@ -125,7 +126,6 @@ const Game = (props) => {
     }
     
     const evaluate_game = () => {
-
         const user_id = parseInt(localStorage.getItem("USER_ID"))
         const game_data = {
             "game_sequence": CORRECT_TILES,

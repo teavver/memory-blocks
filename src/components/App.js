@@ -1,4 +1,4 @@
-import '../styles/App.css';
+import '../styles/app.css';
 import "../styles/variables.css";
 import Game from './Game';
 import Settings from './Settings';

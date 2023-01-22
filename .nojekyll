@@ -1,8 +1,0 @@
-systemctl stop node-api.service
-systemctl disable node-api.service
-rm /etc/systemd/system/node-api.service
-rm /etc/systemd/system/node-api.service # and symlinks that might be related
-rm /usr/lib/systemd/system/node-api.service 
-rm /usr/lib/systemd/system/node-api.service # and symlinks that might be related
-systemctl daemon-reload
-systemctl reset-failed
