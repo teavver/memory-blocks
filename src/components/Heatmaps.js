@@ -27,7 +27,7 @@ const Heatmaps = () => {
     
     return(
         <div>
-            <h1>error heatmap for user {user_id}</h1>
+            <h1>user {user_id}'s heatmap</h1>
             { loading ?
             <div>
             <button onClick={() => load_heatmap()}>Generate</button>

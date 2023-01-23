@@ -6,8 +6,6 @@ import games from "./api/routes/games.js";
 import users from "./api/routes/users.js";
 import heatmaps from "./api/routes/heatmaps.js";
 import leaderboard from "./api/routes/leaderboard.js";
-// import redis_create_heatmap from "./redis/calls/redis_create_heatmap.js";
-// import redis_update_heatmap from "./redis/calls/redis_update_heatmap.js";
 
 dotenv.config()
 
