@@ -6,10 +6,6 @@ import games from "./api/routes/games.js";
 import users from "./api/routes/users.js";
 import heatmaps from "./api/routes/heatmaps.js";
 import leaderboard from "./api/routes/leaderboard.js";
-
-import JupyterViewer from "react-jupyter-notebook";
-import generate_heatmap from "./jupyter/notebooks/generate_heatmap.ipynb";
-
 // import redis_create_heatmap from "./redis/calls/redis_create_heatmap.js";
 // import redis_update_heatmap from "./redis/calls/redis_update_heatmap.js";
 
@@ -42,24 +38,3 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
     res.send('Memory Blocks API')
 })
-
-// app.get('/', (req, res) => {
- 
-//  var dataToSend;
-//  // spawn new child process to call the python script
-//  const python = spawn('python', ['script1.py']);
-//  // collect data from script
-//  python.stdout.on('data', function (data) {
-//   console.log('Pipe data from python script ...');
-//   dataToSend = data.toString();
-//  });
-//  // in close event we are sure that stream from child process is closed
-//  python.on('close', (code) => {
-//  console.log(`child process close all stdio with code ${code}`);
-//  // send data to browser
-//  res.send(dataToSend)
-//  });
- 
-// })
-// app.listen(port, () => console.log(`Example app listening on port 
-// ${port}!`))

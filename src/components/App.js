@@ -3,6 +3,7 @@ import "../styles/variables.css";
 import Game from './Game';
 import Settings from './Settings';
 import Leaderboard from './Leaderboard';
+import Heatmaps from './Heatmaps';
 import updt_css_var from '../utils/updt_css_var';
 import check_setting from '../utils/check_setting';
 import load_settings from '../utils/load_settings';
@@ -20,7 +21,7 @@ function App() {
   const user_id = localStorage.getItem("USER_ID")
 
   // Ref
-  const isFirstRender = useRef(true)
+  let isFirstRender = useRef(true)
 
   // Check user settings on page load
   useEffect(() => {
@@ -123,7 +124,8 @@ function App() {
             : 
             <>
             <div className='game-ctn'>
-            <Game triggerGameReset={triggerGameReset} /> 
+            {/* <Game triggerGameReset={triggerGameReset} />  */}
+            <Heatmaps />
             </div>
             </>
         }
@@ -136,4 +138,4 @@ function App() {
 }
 
 
-export default App;
+export default App
