@@ -20,6 +20,7 @@
     "fs": "^0.0.1-security",
     "ngrok": "^4.3.3",
     "nodemon": "^2.0.20",
+    "react-jupyter-notebook": "^0.4.0",
     "redis": "^4.5.1"
   }
 }
