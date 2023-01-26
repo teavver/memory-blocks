@@ -36,16 +36,16 @@ def generate_plot():
         for j in range(len(hmap_2d)):
             text = ax.text(j,i,str(hmap_2d_perc[i][j]) + '%',ha="center", va="center", color="w")
     
-    # plt.show()
     plot_to_base64(hmap_2d)
 
 def plot_to_base64(heatmap):
-    s = io.BytesIO()
     
+    s = io.BytesIO()
     plt.plot(heatmap)
     plt.savefig(s, format='png', bbox_inches="tight")
     plt.close()
     s = base64.b64encode(s.getvalue()).decode("utf-8").replace("\n", "")
+    # Print returns b64 string to node js request
     print(s)
 
 generate_plot()
