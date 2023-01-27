@@ -15,7 +15,7 @@ function App() {
   // States
   const [leaderboardVisible, setLeaderboardVisible] = useState(false)
   const [settingsVisible, setSettingsVisible] = useState(false)
-  // const [heatmapsVisible, setHeatmapasVisible] = useState(false)
+  const [heatmapsVisible, setHeatmapasVisible] = useState(false)
   const [triggerGameReset, setTriggerGameReset] = useState(false)
 
   // LocalStorage
@@ -64,51 +64,71 @@ function App() {
       <div className='navbar-ctn'>
         <div className='navbar-ctn-left'>
           <div className='navbar-logo'></div>
+
           {/* Game title */}
           <div className='navbar-link'>
             Memory Blocks
           </div>
-          {/* Play (home) */}
+
+          {/* (LINK) Play (home) */}
           <div className='navbar-link'>
             <p className='link monospace bold' onClick={ () => {
               setTriggerGameReset(true)
               setSettingsVisible(false)
               setLeaderboardVisible(false)
-              }}> Play </p>
+              setHeatmapasVisible(false)
+            }}> Play </p>
           </div>
-          {/* Leaderboard (daily + global) */}
+
+          {/* (LINK) Leaderboard (daily + global) */}
           <div className='navbar-link'>
             <p className='link monospace bold' onClick={ () => {
               setTriggerGameReset(true)
               setLeaderboardVisible(true)
               setSettingsVisible(false)
-            }}>Leaderboard</p>
+              setHeatmapasVisible(false)
+            }}> Leaderboard </p>
           </div>
-          {/* Github repo */}
+
+          {/* (LINK) Heatmap (for local user) */}
           <div className='navbar-link'>
-            <p className='link monospace bold'
-            onClick={
-              () => openInNewTab("https://github.com/teavver/memory-blocks")}>Github</p>
+            <p className='link monospace bold' onClick={() => {
+              setTriggerGameReset(true)
+              setHeatmapasVisible(true)
+              setLeaderboardVisible(false)
+              setSettingsVisible(false)
+            }}> Heatmap </p>
           </div>
-          {/* Settings */}
+
+
+          {/* (LINK) Settings */}
           <div className='navbar-link'>
             <p className='link monospace bold' onClick={ () => {
               setTriggerGameReset(true)
               setSettingsVisible(true)
               setLeaderboardVisible(false)
-            }}>Settings</p>
+              }}> Settings </p>
+            </div>
+
+          {/* (LINK) Github repo */}
+          <div className='navbar-link'>
+            <p className='link monospace bold'
+            onClick={
+              () => openInNewTab("https://github.com/teavver/memory-blocks")}>Github</p>
           </div>
-        </div>
+
         {/* ACCOUNTS SOON */}
         {/* <div className='navbar-ctn-right'>
           <div className='navbar-link hidden'>
-            <p onClick={ () => console.log('login') }> Login </p>
+          <p onClick={ () => console.log('login') }> Login </p>
           </div>
           <div className='navbar-link hidden'>
-            <p onClick={ () => console.log('register') }>Register</p>
+          <p onClick={ () => console.log('register') }>Register</p>
           </div>
         </div> */}
+        </div>
       </div>
+
       <div id='main-content'>
         { leaderboardVisible
         ?
@@ -123,13 +143,16 @@ function App() {
             <Settings />
             </div>
             :
-
-            <>
-            <div className='game-ctn'>
-            <Game triggerGameReset={triggerGameReset} /> 
-            {/* <Heatmaps /> */}
-            </div>
-            </>
+              heatmapsVisible ?
+                <div className='heatmaps-ctn'>
+                <Heatmaps />
+                </div>
+              :
+                <>
+                <div className='game-ctn'>
+                <Game triggerGameReset={triggerGameReset} /> 
+                </div>
+                </>
         }
       </div>
       <div className='footer'>

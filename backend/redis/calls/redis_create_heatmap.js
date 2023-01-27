@@ -7,7 +7,7 @@ const redis_create_heatmap = async (user_id) => {
     
     const empty_heatmap = new Array(16); for(let i = 0; i<16; i++) empty_heatmap[i] = 0
     const heatmap_json = JSON.parse(JSON.stringify(empty_heatmap))
-    client.json.SET(`heatmap:${user_id}`,'.',heatmap_json)
+    await client.json.SET(`heatmap:${user_id}`,'.',heatmap_json)
 }
 
 export default redis_create_heatmap

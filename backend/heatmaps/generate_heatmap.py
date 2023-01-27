@@ -27,7 +27,6 @@ def generate_plot():
     # Generate plot from data
     plt.imshow(hmap_2d, cmap='Greens', interpolation='nearest')
     ax = plt.gca()
-    ax.set_title(f'mistake heatmap for user {user_id_str}', fontsize=12, fontweight='bold')
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
 
