@@ -26,8 +26,8 @@ const Heatmaps = () => {
     }
     
     return(
-        <div>
-            <h1>user {user_id}'s heatmap</h1>
+        <>
+            <h2>user {user_id}'s mistake heatmap</h2>
             { loading ?
             <div>
             <button onClick={() => load_heatmap()}>Generate</button>
@@ -36,7 +36,7 @@ const Heatmaps = () => {
             :
             <img src={`data:image/jpeg;base64,${heatmapImg}`}/>
             }
-        </div>
+        </>
     );
 }
 

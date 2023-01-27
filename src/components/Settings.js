@@ -1,10 +1,10 @@
+import { useEffect } from "react";
+import { tile_colors } from "../utils/tile_colors";
+import "../styles/settings.css";
 import update_settings from "../utils/update_settings";
 import toggle_local_storage_setting from "../utils/toggle_local_storage_setting";
 import bool_setting from "../utils/bool_setting";
 import check_setting from "../utils/check_setting";
-import { useEffect } from "react";
-import { tile_colors } from "../utils/tile_colors";
-import "../styles/settings.css";
 
 const Settings = () => {
     

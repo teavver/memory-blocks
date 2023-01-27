@@ -16,10 +16,10 @@ const GET_game = async (req, res) => {
 }
 
 const POST_game = async (req, res) => {
-    const game_id = req.params
+    const game_id = req.params.id
     const game_data = req.body
-    
-    // Check duplicate
+
+    // Check for duplicates
     const exists = await redis_key_exists("game:"+game_id.id)
     if(exists === 1){ console.error("Trying to POST duplicate"); return }
 

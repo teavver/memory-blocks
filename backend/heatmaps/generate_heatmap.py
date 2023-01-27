@@ -9,7 +9,6 @@ def generate_plot():
 
     # Data from redis
     heatmap_str = sys.argv[1]
-    user_id_str = sys.argv[2]
     
     # Convert heatmap_str to list, then to chunks
     heatmap_list = heatmap_str.split(',')
@@ -25,7 +24,7 @@ def generate_plot():
     hmap_2d = [heatmap_int_list[i:i + 4] for i in range(0, len(heatmap_int_list), 4)]
     
     # Generate plot from data
-    plt.imshow(hmap_2d, cmap='Greens', interpolation='nearest')
+    plt.imshow(hmap_2d, cmap='Blues', interpolation='nearest')
     ax = plt.gca()
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
@@ -33,15 +32,14 @@ def generate_plot():
     # Text annotations
     for i in range(len(hmap_2d)):
         for j in range(len(hmap_2d)):
-            text = ax.text(j,i,str(hmap_2d_perc[i][j]) + '%',ha="center", va="center", color="w")
+            text = ax.text(j,i,str(hmap_2d_perc[i][j]) + '%',ha="center", va="center", color="black")
     
     plot_to_base64(hmap_2d)
 
 def plot_to_base64(heatmap):
     
     s = io.BytesIO()
-    plt.plot(heatmap)
-    plt.savefig(s, format='png', bbox_inches="tight")
+    plt.savefig(s, format='png', bbox_inches="tight", transparent=True)
     plt.close()
     s = base64.b64encode(s.getvalue()).decode("utf-8").replace("\n", "")
     # Print returns b64 string to node js request

@@ -3,7 +3,8 @@ import { client } from "../../server.js";
 const redis_get_leaderboard = async () => {
         
     let leaderboard_unsorted = []
-    const games = await client.KEYS("*")
+    const games = await client.KEYS("*game:*")
+    console.log(games)
 
     const leaderboard_limit = 10
     for(const [i, game] of games.entries()) {
@@ -21,11 +22,7 @@ const redis_get_leaderboard = async () => {
 
         leaderboard_unsorted.push(game_data)
     }
-
     const leaderboard_sorted = leaderboard_unsorted.sort((a,b) => b.score - a.score)
-
-    console.log(leaderboard_sorted)
-    console.log(leaderboard_sorted.length)
 
     return leaderboard_sorted
 }

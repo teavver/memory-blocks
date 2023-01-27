@@ -6,6 +6,7 @@ import GameTiles from "./GameTiles";
 import GameOver from "./GameOver";
 import Score from "./Score";
 import POST_game from "../utils/api/POST_game";
+import POST_heatmap from "../utils/api/POST_heatmap";
 
 // Real-time-needed game variables
 let CORRECT_TILES = []
@@ -134,6 +135,7 @@ const Game = (props) => {
             "user_id": user_id,
         }
         POST_game(game_data)
+        POST_heatmap(game_data.last_tile)
     }
 
     const reset_game = () => {

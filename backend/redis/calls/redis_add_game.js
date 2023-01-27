@@ -9,7 +9,6 @@ const redis_add_game = async (game_data) => {
     // "user_id": NUMERIC,
     // "game_id": NUMERIC,
 
-    client.ft.CREATE('gameIdx',)
     client.json.SET(`game:${game_data.game_id}`, ".", game_data)
 }
 

@@ -1,16 +1,10 @@
 .heatmaps-ctn {
-
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    
+    padding: 20px;
     border: 5px solid rgba(0,0,0,0.11);
     border-radius: 8px;
-}
-
-.heatmaps-title {
-
-}
-
-.heatmaps-btn {
-
 }

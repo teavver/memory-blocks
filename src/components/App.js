@@ -1,5 +1,6 @@
 import '../styles/app.css';
 import "../styles/variables.css";
+import "../styles/heatmaps.css";
 import Game from './Game';
 import Settings from './Settings';
 import Leaderboard from './Leaderboard';
