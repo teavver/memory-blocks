@@ -15,6 +15,7 @@ function App() {
   // States
   const [leaderboardVisible, setLeaderboardVisible] = useState(false)
   const [settingsVisible, setSettingsVisible] = useState(false)
+  // const [heatmapsVisible, setHeatmapasVisible] = useState(false)
   const [triggerGameReset, setTriggerGameReset] = useState(false)
 
   // LocalStorage
@@ -99,14 +100,14 @@ function App() {
           </div>
         </div>
         {/* ACCOUNTS SOON */}
-        <div className='navbar-ctn-right'>
+        {/* <div className='navbar-ctn-right'>
           <div className='navbar-link hidden'>
             <p onClick={ () => console.log('login') }> Login </p>
           </div>
           <div className='navbar-link hidden'>
             <p onClick={ () => console.log('register') }>Register</p>
           </div>
-        </div>
+        </div> */}
       </div>
       <div id='main-content'>
         { leaderboardVisible
@@ -121,11 +122,12 @@ function App() {
             <CloseSettingsBtn />
             <Settings />
             </div>
-            : 
+            :
+
             <>
             <div className='game-ctn'>
-            {/* <Game triggerGameReset={triggerGameReset} />  */}
-            <Heatmaps />
+            <Game triggerGameReset={triggerGameReset} /> 
+            {/* <Heatmaps /> */}
             </div>
             </>
         }

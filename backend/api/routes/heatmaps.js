@@ -14,7 +14,6 @@ const GET_heatmaps = async (req, res) => {
     python.stdout.on('data', function (data){
         // Pass b64 data returned from py as response
         base64_data = data.toString()
-        // console.log(base64_data)
         res.send(base64_data)
     })
 
@@ -26,12 +25,8 @@ const GET_heatmaps = async (req, res) => {
 
 const POST_heatmaps = async (req,res) => {
     const user_id = req.params.userId
-    const index_to_increment = req.body
-    // console.log(index_to_increment)
-    res.json({requestBody: req.body})
-
-    await redis_update_heatmap(user_id, index_to_increment)
-    console.log("heatmap for user "+user_id+" updated")
+    const index_obj = req.body
+    await redis_update_heatmap(user_id, index_obj)
 }
 
 heatmaps.route('/heatmaps/:userId')
