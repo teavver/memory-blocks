@@ -9,7 +9,7 @@ const redis_add_game = async (game_data) => {
     // "user_id": NUMERIC,
     // "game_id": NUMERIC,
 
-    client.json.SET(`game:${game_data.game_id}`, ".", game_data)
+    await client.json.SET(`game:${game_data.game_id}`, ".", game_data)
 }
 
 export default redis_add_game

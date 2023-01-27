@@ -4,7 +4,6 @@ const redis_get_leaderboard = async () => {
         
     let leaderboard_unsorted = []
     const games = await client.KEYS("*game:*")
-    console.log(games)
 
     const leaderboard_limit = 10
     for(const [i, game] of games.entries()) {

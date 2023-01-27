@@ -24,7 +24,6 @@ const redis_update_heatmap = async (user_id, index_obj) => {
         const heatmap = await client.json.GET(`heatmap:${user_id}`,)
         heatmap[index_obj.index] += 0.2
         await client.json.SET(`heatmap:${user_id}`,'.',heatmap)
-        console.log(heatmap)
     }
 
     // Check if the heatmap exists

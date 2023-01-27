@@ -8,9 +8,8 @@ const heatmaps = Router()
 
 const GET_heatmaps = async (req, res) => {
     const user_id = req.params.userId
-    redis_create_heatmap(user_id) // Creates if there isn't one, otherwise skip
+    await redis_create_heatmap(user_id) // Creates if there isn't one, otherwise skip
     const heatmap_data = await redis_get_json(`heatmap:${user_id}`)
-    console.log(heatmap_data)
 
     var base64_data
     const python = spawn('python', ['./heatmaps/generate_heatmap.py', heatmap_data])
@@ -21,9 +20,9 @@ const GET_heatmaps = async (req, res) => {
     })
 
     // Close and return python exit code
-    python.on('close', (code) => {
-        console.log(`python closed with code ${code}`)
-    }) 
+    // python.on('close', (code) => {
+    //     console.log(`python closed with code ${code}`)
+    // }) 
 }
 
 const POST_heatmaps = async (req, res) => {
